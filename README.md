@@ -11,7 +11,7 @@ explanation of what we learned that day.
 Fire up a useful Docker container:
 
 ```
-docker run -it -v /local/path/to/this/directory:/root/cobol gregcoleman/docker-cobol /bin/bash
+docker run -it -v $PWD:/root/cobol -w /root/docker gregcoleman/docker-cobol /bin/bash
 ```
 
 This volume maps wherever you've cloned this to `/root/cobol` within the
