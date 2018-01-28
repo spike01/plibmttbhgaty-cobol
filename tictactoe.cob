@@ -5,8 +5,6 @@
        WORKING-STORAGE SECTION.
        01 PLAYER-INPUT PIC 9(2).
        01 CURRENT-MOVE PIC A VALUE "X".
-       01 TMP-MOVE PIC A.
-       01 NEXT-MOVE PIC A VALUE "O".
        01 GAME-OVER PIC 9 VALUE 0.
 
        01 BOARD.
@@ -41,37 +39,21 @@
            .
 
        CHECK-WIN.
-           MOVE 1 TO IDX(1)
-           MOVE 2 TO IDX(2)
-           MOVE 3 TO IDX(3)
+           MOVE 123 to WINNING-COMBINATIONS
            PERFORM CHECK-LINE
-           MOVE 4 TO IDX(1)
-           MOVE 5 TO IDX(2)
-           MOVE 6 TO IDX(3)
+           MOVE 456 to WINNING-COMBINATIONS
            PERFORM CHECK-LINE
-           MOVE 7 TO IDX(1)
-           MOVE 8 TO IDX(2)
-           MOVE 9 TO IDX(3)
+           MOVE 789 to WINNING-COMBINATIONS
            PERFORM CHECK-LINE
-           MOVE 1 TO IDX(1)
-           MOVE 4 TO IDX(2)
-           MOVE 7 TO IDX(3)
+           MOVE 147 to WINNING-COMBINATIONS
            PERFORM CHECK-LINE
-           MOVE 2 TO IDX(1)
-           MOVE 5 TO IDX(2)
-           MOVE 8 TO IDX(3)
+           MOVE 258 TO WINNING-COMBINATIONS
            PERFORM CHECK-LINE
-           MOVE 3 TO IDX(1)
-           MOVE 6 TO IDX(2)
-           MOVE 7 TO IDX(3)
+           MOVE 367 TO WINNING-COMBINATIONS
            PERFORM CHECK-LINE
-           MOVE 1 TO IDX(1)
-           MOVE 3 TO IDX(2)
-           MOVE 9 TO IDX(3)
+           MOVE 139 TO WINNING-COMBINATIONS
            PERFORM CHECK-LINE
-           MOVE 3 TO IDX(1)
-           MOVE 5 TO IDX(2)
-           MOVE 7 TO IDX(3)
+           MOVE 357 TO WINNING-COMBINATIONS
            PERFORM CHECK-LINE
            .
 
@@ -94,9 +76,11 @@
              .
 
        CHANGE-PLAYER.
-           MOVE CURRENT-MOVE TO TMP-MOVE
-           MOVE NEXT-MOVE TO CURRENT-MOVE
-           MOVE TMP-MOVE TO NEXT-MOVE
+           IF CURRENT-MOVE IS EQUAL TO "X"
+             MOVE "O" TO CURRENT-MOVE
+           ELSE
+             MOVE "X" TO CURRENT-MOVE
+           END-IF
            .
 
        CHECK-LINE.
@@ -104,6 +88,7 @@
              AND CELL(IDX(2)) IS EQUAL TO CURRENT-MOVE 
              AND CELL(IDX(3)) IS EQUAL TO CURRENT-MOVE THEN
              MOVE 1 TO GAME-OVER
+             PERFORM SHOW-BOARD
              DISPLAY CURRENT-MOVE " IS THE WINNER."
            END-IF
            .
